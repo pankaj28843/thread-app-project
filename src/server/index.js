@@ -1,23 +1,23 @@
-const express = require("express");
-const path = require("path");
+import express from 'express';
+import path from 'path';
 
 const app = express();
-app.use(express.static("dist"));
+app.use(express.static('dist'));
 
-const buildDirectory = path.join(__dirname, "../../dist");
+const buildDirectory = path.join(__dirname, '../../dist');
 
 // Serve the static files from the React app
 app.use(express.static(buildDirectory));
 
-app.get("/api/hello", (req, res) => {
+app.get('/api/hello', (req, res) => {
   res.send({
-    hello: "world"
+    hello: 'world',
   });
 });
 
 // Handles any requests that don't match the ones above
-app.get("*", (req, res) => {
-  res.sendFile(path.join(buildDirectory, "index.html"));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(buildDirectory, 'index.html'));
 });
 
 const PORT = process.env.PORT || 8080;
