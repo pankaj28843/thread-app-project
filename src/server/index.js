@@ -1,11 +1,17 @@
 import express from 'express';
 import path from 'path';
+import bodyParser from 'body-parser';
+// import  db from './config/db';
+
+import apiRoutes from './routes';
 
 const app = express();
-app.use(express.static('dist'));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.use('/api', apiRoutes);
 
 const buildDirectory = path.join(__dirname, '../../dist');
-
 // Serve the static files from the React app
 app.use(express.static(buildDirectory));
 
